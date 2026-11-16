@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Договор24 Sign — Политика конфиденциальности</title>
+  <style>
+    body { font-family: 'Segoe UI', system-ui, sans-serif; color:#2c3e50; max-width:760px; margin:0 auto; padding:40px 22px; line-height:1.65; }
+    h1 { font-size:24px; } h2 { font-size:18px; margin-top:28px; }
+    .muted { color:#8696a7; font-size:14px; }
+    code { background:#f5f8fb; padding:1px 6px; border-radius:5px; }
+    .en { background:#f5f8fb; border-left:3px solid #1c8ed6; padding:12px 16px; border-radius:6px; margin:18px 0; font-size:14px; }
+    ul li { margin:5px 0; }
+  </style>
+</head>
+<body>
+  <h1>Политика конфиденциальности — Договор24 Sign</h1>
+  <p class="muted">Последнее обновление: 16 ноября 2026 г.</p>
+
+  <div class="en">
+    <b>Summary for reviewers (EN).</b> «Договор24 Sign» is a browser extension that performs
+    electronic-signature (GOST/RSA) operations for <code>new.dogovor24.kz</code> and Kazakhstan
+    government services that rely on NCALayer, replacing the NCALayer desktop app. All private
+    keys, the master password, settings, delegation tokens and the local signature log are stored
+    <b>locally</b> in the browser, <b>encrypted</b> (AES-GCM + PBKDF2). Biometric unlock uses
+    WebAuthn (Windows Hello / Touch ID): biometric data is handled entirely by the operating
+    system and is <b>never accessible to the extension</b> — only a credential identifier and its
+    public key are stored locally. The developer does <b>not collect, transmit, sell or share any
+    user data</b>. Apart from the optional Dogovor24 features described below (Google Docs → Dogovor24 and new-document notifications),
+    outbound requests go only to the Kazakhstan National Certification Authority:
+    the timestamp authority <code>tsp.pki.gov.kz</code> during signing (hash of the signature
+    only) and, when signing documents for ESEDO (the government e-document exchange) or embedding
+    a signature inside a PDF, the OCSP responder <code>ocsp.pki.gov.kz</code> and, if needed, the
+    CA certificate files on <code>pki.gov.kz</code> / <code>root.gov.kz</code> (the certificate serial
+    number and hashes of the issuing CA — never the document or the key). If the user also has the NCALayer desktop app installed, the extension may
+    hand the page's own signing request over to it on the local address
+    <code>127.0.0.1:13579</code> (for example when the user cancels the extension's dialog) —
+    that connection never leaves the user's machine. <b>Google Docs → Dogovor24</b> (only for
+    users currently signed in to <code>new.dogovor24.kz</code> in the same browser, and only when
+    the user clicks): the extension reads the user's own Dogovor24 session cookies
+    (<code>access_token</code>, <code>workspace_id</code>) locally via the cookies API and uses
+    them solely to call <code>new.dogovor24.kz</code> on the user's behalf — upload the chosen
+    document, list the user's folders, add the user's own signature. The token is never stored by
+    the extension or sent anywhere else. The Google document the user chose to send is exported to
+    PDF from <code>docs.google.com</code> with the user's existing Google session (no OAuth, no
+    access to other files) and uploaded only to Dogovor24. Optional new-document notifications (off by default; the user turns them on in Settings, and Chrome then asks for the optional notifications permission): while the user is signed in to new.dogovor24.kz, the extension checks once a minute, with the same session, the counter and the list of the user’s own incoming Dogovor24 documents awaiting signature, approval or review, and shows a system notification about new ones. Only the title, sender, action and deadline are used and kept locally; documents are not downloaded.
+    <b>Optional Google Drive</b> (off by default; the user clicks “Connect Google Drive” in Settings, and Chrome then asks for the optional <code>identity</code> permission): the user signs in with Google in Google’s own window (<code>chrome.identity.launchWebAuthFlow</code>, scope <code>drive.file</code> — access only to files the extension itself creates); the PDFs the user signs are uploaded to a folder in the user’s own Drive and shared only as the user chooses (anyone with the link, or a specific person whom Google emails). The Google account email is shown in Settings and written into the PDF signature so that the other party can return the signed file. The access token is kept only in browser session memory; “Disconnect” revokes it. The extension’s use and transfer of information received from Google APIs adheres to the Google API Services User Data Policy, including the Limited Use requirements.
+    No analytics, no tracking, no remote code.
+  </div>
+
+  <h2>1. Кто мы</h2>
+  <p>«Договор24 Sign» — расширение для браузера Chrome, которое позволяет подписывать документы
+  электронной цифровой подписью (ЭЦП) и входить по ЭЦП на сайте <code>new.dogovor24.kz</code>
+  и на государственных сервисах Казахстана, использующих NCALayer (например
+  <code>egov.kz</code>), прямо в браузере — без установки отдельной программы NCALayer.</p>
+
+  <h2>2. Какие данные обрабатываются</h2>
+  <ul>
+    <li><b>Файлы ключей ЭЦП</b> (<code>.p12</code>/<code>.pfx</code>), которые вы импортируете,
+      и пароль от них.</li>
+    <li><b>Мастер-пароль</b> расширения (если вы его задаёте) и настройки (блокировка,
+      подтверждение подписи и т. п.).</li>
+    <li><b>Данные биометрической разблокировки</b> (если вы её включаете): идентификатор
+      WebAuthn-учётных данных и их публичный ключ. Сами биометрические данные (отпечаток,
+      лицо) обрабатываются операционной системой (Windows Hello / Touch ID) и расширению
+      <b>никогда не доступны</b>.</li>
+    <li><b>Токены доступа для автоматизации</b> (если вы их создаёте): название, выбранный ключ,
+      список сайтов, срок действия и счётчик использований.</li>
+    <li><b>Локальный журнал подписей</b>: время, сайт-инициатор, имя ключа и способ
+      подтверждения последних операций подписания.</li>
+    <li><b>Файлы, которые вы подписываете или перетаскиваете</b> в расширение: формат
+      проверяется и подпись формируется только на вашем устройстве; в Договор24 файл уходит,
+      только если вы нажали «Отправить в Договор24», а на Google Диск — только если вы подключили
+      Диск и оставили отмеченным «Сохранить копию на Google Диск».</li>
+    <li><b>Если вы подключили Google Диск</b>: адрес вашего аккаунта Google (показывается в
+      Настройках и вписывается в подпись PDF, сохранённого на Диск, — по нему вторая сторона
+      может вернуть вам подписанный файл), название и номер папки на Диске, выбранные настройки
+      доступа; адреса, которые вы сами вводите, чтобы отправить файл следующему подписанту, и
+      адрес отправителя из подписи, когда вы возвращаете ему файл; токен доступа Google —
+      только в памяти браузера.</li>
+    <li><b>Если вы пользуетесь Договор24</b> (функция «Google Docs → Договор24»): токен вашей
+      сессии Договор24 (cookie <code>access_token</code>) и номер пространства
+      (<code>workspace_id</code>) — расширение читает их в браузере в момент действия и
+      <b>не сохраняет</b>; email из токена показывается в Настройках; выбранная папка для
+      загрузки и список папок хранятся локально; документ Google, который вы отправляете,
+      обрабатывается только в момент отправки, в виде PDF.</li>
+    <li><b>Если вы включили уведомления о новых документах</b>: название, отправитель, вид
+      действия (подписать, согласовать, ознакомиться) и срок документов из ваших «Моих
+      входящих» Договор24. Они хранятся локально и показываются в уведомлении и в окне
+      расширения; <b>сами документы не скачиваются</b>.</li>
+  </ul>
+  <p>Эти данные нужны исключительно для формирования подписи на вашем устройстве и для
+  отправки выбранных вами документов в Договор24 или на ваш Google Диск; они видны только вам.</p>
+
+  <h2>3. Где хранятся данные</h2>
+  <p>Все ключи, настройки, токены и журнал хранятся <b>только локально</b> в вашем браузере
+  (IndexedDB и <code>chrome.storage</code>). Приватные ключи <b>шифруются</b> алгоритмом
+  AES-GCM с ключом, выведенным через PBKDF2 из вашего мастер-пароля или локального секрета
+  устройства. Токен доступа Google (если вы подключили Google Диск) хранится только в памяти
+  браузера и стирается при его закрытии. Мы (разработчик) <b>не получаем доступ</b> к этим данным
+  и <b>никуда их не передаём</b>.</p>
+
+  <h2>4. Передача данных третьим лицам</h2>
+  <p>Расширение <b>не собирает</b>, <b>не продаёт</b> и <b>не передаёт</b> персональные данные.
+  Сетевые запросы ограничены:</p>
+  <ul>
+    <li>сайты, на которых вы подписываете (<code>egov.kz</code>, КГД, <code>goszakup.gov.kz</code>,
+      ИС ЭСФ, <code>stat.gov.kz</code>, <code>enbek.kz</code>, <code>elicense.kz</code>,
+      <code>imei.kz</code>, <code>new.dogovor24.kz</code> и другие порталы с NCALayer) —
+      это сайты, на которых вы и так работаете; расширение лишь обеспечивает подписание
+      и вход на них, подменяя NCALayer. Никакой информации о посещённых сайтах
+      разработчику не передаётся.</li>
+    <li><code>tsp.pki.gov.kz</code> — государственная служба меток времени (TSA) Республики
+      Казахстан; туда отправляется только хеш подписи для получения метки времени RFC&nbsp;3161
+      (требование формата CAdES-T). Сам документ и ключ туда не отправляются.</li>
+    <li><code>ocsp.pki.gov.kz</code> — служба проверки статуса сертификатов (OCSP) Национального
+      удостоверяющего центра РК; запрос уходит при подписи документов для ЕСЭДО (электронного
+      документооборота госорганов) и при подписи внутри PDF. Туда отправляется серийный номер
+      сертификата и хеши данных удостоверяющего центра, выдавшего его, — чтобы получить
+      подтверждение «сертификат действителен», которое вкладывается в подпись (этого требуют
+      формат ЕСЭДО и долговременная подпись PDF). При подписи внутри PDF так же проверяется
+      сертификат службы меток времени, а недостающие сертификаты удостоверяющих центров
+      скачиваются с сайтов НУЦ (<code>pki.gov.kz</code>, <code>root.gov.kz</code>). Сам документ
+      и ключ туда не отправляются.</li>
+    <li><b>Google Диск</b> (<code>accounts.google.com</code>, <code>www.googleapis.com</code>) —
+      только если вы сами подключили Google Диск в Настройках. Вход выполняется в окне Google;
+      расширение получает доступ <code>drive.file</code> — только к файлам, которые само создаёт
+      на вашем Диске, остальные ваши файлы ему недоступны. По вашему действию подписанный PDF
+      загружается в папку на вашем Диске, а доступ к нему открывается так, как вы выбрали: всем,
+      у кого есть ссылка, или конкретному человеку — письмо со ссылкой ему отправляет Google.
+      Разработчику эти данные не передаются. Использование и передача информации, полученной
+      через API Google, соответствуют Google API Services User Data Policy, включая требования
+      Limited Use.</li>
+    <li><code>docs.google.com</code> — только когда вы нажали «Отправить в Договор24» или
+      «Подписать и отправить» в открытом документе Google: расширение получает у Google PDF
+      <b>именно этого документа</b>, используя ваш вход в Google в этом браузере (без OAuth и
+      без доступа к другим файлам). Google отдаёт файл через свой адрес
+      <code>googleusercontent.com</code>.</li>
+    <li><code>new.dogovor24.kz</code> — только если вы вошли в Договор24 в этом браузере, и
+      по вашему нажатию: загрузка выбранного документа в ваше пространство, список
+      ваших папок и ваша собственная подпись документа. Запросы идут от вашего имени с
+      токеном вашей сессии; <b>токен никуда больше не передаётся</b>. Если вы включили
+      уведомления о новых документах — ещё и раз в минуту проверка счётчика и списка ваших
+      «Моих входящих» (название, отправитель, срок); документы при этом не скачиваются.</li>
+    <li>установленный у вас <b>NCALayer</b> (локальный адрес <code>127.0.0.1:13579</code>),
+      если он есть: расширение передаёт ему ваш же запрос на подпись, когда подписывать
+      должно не оно — например, вы нажали «Отмена» в окне расширения или ещё не добавили
+      ни одного ключа. Это соединение не покидает ваш компьютер, и делается оно ровно с
+      теми данными, которые сайт и так отправил бы NCALayer напрямую.</li>
+  </ul>
+  <p>Никакой аналитики, трекинга или загрузки удалённого кода расширение не использует.</p>
+
+  <h2>5. Запрашиваемые разрешения</h2>
+  <ul>
+    <li><code>storage</code> — локальное хранение зашифрованных ключей, настроек и журнала.</li>
+    <li><code>alarms</code> — таймер автоблокировки: блокирует хранилище ключей после
+      выбранного вами времени простоя; если включены уведомления о новых документах —
+      проверка входящих Договор24 раз в минуту.</li>
+    <li><code>unlimitedStorage</code> — защита локального хранилища от автоматической очистки
+      браузером при нехватке места на диске (чтобы ваши ключи не пропали).</li>
+    <li><code>sidePanel</code> — показ стартового экрана расширения в боковой панели браузера:
+      она не закрывается при переходе в проводник, поэтому туда можно перетащить файл. Данные не
+      передаются.</li>
+    <li><code>cookies</code> — чтение <b>только</b> cookie сессии Договор24
+      (<code>access_token</code>, <code>workspace_id</code>): чтобы понимать, вошли ли вы в
+      Договор24, и отправлять документы от вашего имени. Другие cookie расширение не читает.</li>
+    <li><code>notifications</code> (<b>необязательное</b>) — Chrome спрашивает его, только когда
+      вы включаете уведомления о новых документах в Настройках; без него расширение
+      уведомлений не показывает.</li>
+    <li><code>identity</code> (<b>необязательное</b>) — Chrome спрашивает его, только когда вы
+      нажимаете «Подключить Google Диск» в Настройках: оно нужно для входа в Google в окне Google
+      и сохранения подписанных PDF на ваш Диск.</li>
+    <li><b>доступ к сайтам</b> — внедрение скрипта, заменяющего NCALayer. Скрипт
+      подключается на всех сайтах, потому что NCALayer используют сотни порталов РК
+      (egov.kz, КГД, goszakup, ЭСФ, stat.gov.kz, enbek.kz, imei.kz, new.dogovor24.kz
+      и др.), а их список постоянно меняется. Скрипт <b>не читает и не изменяет
+      содержимое страниц</b>: он перехватывает только обращение страницы к адресу
+      NCALayer (<code>127.0.0.1:13579</code>) и бездействует, пока подпись не запрошена.
+      По этому же адресу он может обратиться сам — чтобы передать запрос установленному
+      NCALayer, когда подписывать должно не расширение (см. раздел 4). Отдельный небольшой
+      скрипт работает только на страницах документов Google и только при активной сессии
+      Договор24 показывает плашку с кнопками отправки; содержимое документа он не читает —
+      PDF по вашему нажатию получает фоновая часть расширения у Google.</li>
+    <li>доступ к <code>new.dogovor24.kz</code>, <code>docs.google.com</code> и
+      <code>*.googleusercontent.com</code> — отправка выбранных вами документов в Договор24 и
+      получение PDF открытого документа Google (см. раздел 4).</li>
+    <li>доступ к <code>tsp.pki.gov.kz</code> — получение метки времени при подписании;
+      обращения к <code>ocsp.pki.gov.kz</code> при подписи для ЕСЭДО и внутри PDF и к Google
+      Диску покрываются доступом к сайтам, отдельного разрешения не требуют.</li>
+  </ul>
+
+  <h2>6. Удаление данных</h2>
+  <p>Вы можете в любой момент:</p>
+  <ul>
+    <li>удалить отдельные ключи и токены доступа в интерфейсе расширения;</li>
+    <li>выключить кнопки в Google Docs и уведомления о новых документах (Настройки →
+      «Договор24 и Google Docs») или выйти из Договор24 на сайте — тогда расширение перестаёт
+      обращаться к Договор24; при выключении уведомлений сохранённый список входящих
+      стирается;</li>
+    <li>отключить Google Диск (Настройки → «Google Диск» → «Отключить»): токен отзывается у
+      Google, адрес аккаунта забывается; полностью отозвать доступ можно на странице
+      <code>myaccount.google.com/permissions</code>. Файлы на вашем Диске остаются вашими —
+      удалить их можно в самом Google Диске;</li>
+    <li>стереть все данные кнопкой «Забыли пароль? Сбросить расширение» на экране
+      блокировки;</li>
+    <li>удалить расширение из браузера (<code>chrome://extensions</code>) — локальное
+      хранилище очищается вместе с ним.</li>
+  </ul>
+
+  <h2>7. Контакты</h2>
+  <p>По вопросам конфиденциальности: <b>ilya.i.tarasov@gmail.com</b>.</p>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Договор24 Sign — подпись ЭЦП в браузере</title>
+  <style>
+    body { font-family: 'Segoe UI', system-ui, sans-serif; color:#2c3e50; max-width:760px; margin:0 auto; padding:40px 22px; line-height:1.65; }
+    h1 { font-size:24px; } h2 { font-size:18px; margin-top:28px; }
+    code { background:#f5f8fb; padding:1px 6px; border-radius:5px; }
+    .en { background:#f5f8fb; border-left:3px solid #1c8ed6; padding:12px 16px; border-radius:6px; margin:18px 0; font-size:14px; }
+    ul li { margin:5px 0; }
+  </style>
+</head>
+<body>
+  <h1>Договор24 Sign</h1>
+  <p>Расширение Chrome для подписания документов электронной цифровой подписью (ЭЦП) и входа
+  по ЭЦП прямо в браузере. Отдельную настольную программу устанавливать и запускать не нужно —
+  расширение выполняет подпись само.</p>
+
+  <ul>
+    <li>Не привязано к списку сайтов: работает на любом портале, который для подписи или входа
+      вызывает NCALayer, — в том числе на государственных сервисах Казахстана.</li>
+    <li>Подпись файлов без сайта: перетащили документ в окно «Подписать файл» — получили .cms
+      с меткой времени.</li>
+    <li>Подпись внутри PDF: в окне «Подписать файл» подпись можно встроить в сам PDF и добавить
+      в конце лист подписей.</li>
+    <li>Google Диск (по желанию): подписанный PDF можно сразу сохранить на свой Диск и поделиться
+      ссылкой или отправить следующему подписанту, а он вернёт файл со своей подписью.
+      Включается в настройках.</li>
+    <li>Локальное хранение: приватные ключи шифруются (AES-GCM + PBKDF2) и не покидают устройство.</li>
+  </ul>
+
+  <h2>Доступ к Google Диску</h2>
+  <p>Только если вы сами подключили Google Диск в Настройках. Вход выполняется в окне Google;
+  расширение получает доступ <code>drive.file</code> — только к файлам, которые само создаёт на
+  вашем Диске, остальные ваши файлы ему недоступны. Разработчику эти данные не передаются.</p>
+
+  <p>
+    <a href="https://chromewebstore.google.com/detail/bhammenahpfpkgmebmhmdckhgglbejjp">Установить из Chrome Web Store</a><br>
+    <a href="https://annoyt.github.io/privacy.html">Политика конфиденциальности</a><br>
+    <a href="https://forms.gle/ggf2wosmggfcJj7U9">Обратная связь, вопросы и сообщения об ошибках</a>
+  </p>
+
+  <div class="en">
+    <b>Dogovor24 Sign</b> is a Chrome extension for signing documents with a Kazakhstan
+    electronic digital signature (EDS) and for signing in with it, right in the browser.
+    Optionally, a signed PDF can be saved to the user's own Google Drive. The extension uses
+    the <code>drive.file</code> scope: it can access only the files it creates.
+    <a href="https://annoyt.github.io/privacy.html">Privacy policy</a>.
+  </div>
+
+  <p>Расширение не связано с Национальным удостоверяющим центром РК и с разработчиками NCALayer.</p>
+</body>
+</html>
