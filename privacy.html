@@ -15,7 +15,7 @@
 </head>
 <body>
   <h1>Политика конфиденциальности — Договор24 Sign</h1>
-  <p class="muted">Последнее обновление: 16 ноября 2026 г.</p>
+  <p class="muted">Последнее обновление: 18 ноября 2026 г.</p>
 
   <div class="en">
     <b>Summary for reviewers (EN).</b> «Договор24 Sign» is a browser extension that performs
@@ -45,6 +45,7 @@
     PDF from <code>docs.google.com</code> with the user's existing Google session (no OAuth, no
     access to other files) and uploaded only to Dogovor24. Optional new-document notifications (off by default; the user turns them on in Settings, and Chrome then asks for the optional notifications permission): while the user is signed in to new.dogovor24.kz, the extension checks once a minute, with the same session, the counter and the list of the user’s own incoming Dogovor24 documents awaiting signature, approval or review, and shows a system notification about new ones. Only the title, sender, action and deadline are used and kept locally; documents are not downloaded.
     <b>Optional Google Drive</b> (off by default; the user clicks “Connect Google Drive” in Settings, and Chrome then asks for the optional <code>identity</code> permission): the user signs in with Google in Google’s own window (<code>chrome.identity.launchWebAuthFlow</code>, scope <code>drive.file</code> — access only to files the extension itself creates); the PDFs the user signs are uploaded to a folder in the user’s own Drive and shared only as the user chooses (anyone with the link, or a specific person whom Google emails). The Google account email is shown in Settings and written into the PDF signature so that the other party can return the signed file. The access token is kept only in browser session memory; “Disconnect” revokes it. The extension’s use and transfer of information received from Google APIs adheres to the Google API Services User Data Policy, including the Limited Use requirements.
+    Error log: errors and NCALayer requests from sites (date and time, error text, site address, the shape of the request without documents, keys or passwords) are kept only on the device for 30 days; the developer receives them only if the user copies the report and sends it themselves.
     No analytics, no tracking, no remote code.
   </div>
 
@@ -88,6 +89,9 @@
       действия (подписать, согласовать, ознакомиться) и срок документов из ваших «Моих
       входящих» Договор24. Они хранятся локально и показываются в уведомлении и в окне
       расширения; <b>сами документы не скачиваются</b>.</li>
+    <li><b>Журнал ошибок</b> хранится только на вашем компьютере 30 дней: дата и время, текст
+      ошибки, адреса сайтов, обращавшихся к NCALayer, и вид их запросов, без документов, ключей
+      и паролей. Разработчик получает его, только если вы сами скопируете отчёт и отправите.</li>
   </ul>
   <p>Эти данные нужны исключительно для формирования подписи на вашем устройстве и для
   отправки выбранных вами документов в Договор24 или на ваш Google Диск; они видны только вам.</p>
@@ -176,6 +180,7 @@
       и др.), а их список постоянно меняется. Скрипт <b>не читает и не изменяет
       содержимое страниц</b>: он перехватывает только обращение страницы к адресу
       NCALayer (<code>127.0.0.1:13579</code>) и бездействует, пока подпись не запрошена.
+      После ответа расширения он в течение минуты отмечает ошибки на странице и отказы её сервера — только для журнала ошибок на вашем компьютере.
       По этому же адресу он может обратиться сам — чтобы передать запрос установленному
       NCALayer, когда подписывать должно не расширение (см. раздел 4). Отдельный небольшой
       скрипт работает только на страницах документов Google и только при активной сессии
@@ -203,6 +208,7 @@
       удалить их можно в самом Google Диске;</li>
     <li>стереть все данные кнопкой «Забыли пароль? Сбросить расширение» на экране
       блокировки;</li>
+    <li>очистить журнал ошибок («Обратная связь» → «Очистить журнал ошибок»);</li>
     <li>удалить расширение из браузера (<code>chrome://extensions</code>) — локальное
       хранилище очищается вместе с ним.</li>
   </ul>
